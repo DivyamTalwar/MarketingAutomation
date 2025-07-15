@@ -1,0 +1,81 @@
+# ✨ AI Marketing Team: Automation Cost & Strategy Overview ✨
+
+### **Executive Summary**
+
+This document provides a comprehensive breakdown of the operational costs for the AI Marketing Team's automated content creation workflow. Our strategy focuses on leveraging a curated stack of best-in-class AI services to produce high-quality marketing assets efficiently and cost-effectively. All services operate on a flexible, pay-as-you-go model, ensuring optimal return on investment.
+
+---
+
+## 🧠 **Component 1: Text Generation & Reasoning**
+
+At the core of our content strategy is **Google's Gemini 1.5 Flash**. This advanced model handles all language-based tasks, from initial brainstorming and content drafting to sophisticated reasoning for our AI agents. Its balance of speed, intelligence, and cost-efficiency makes it the ideal foundation for our text generation needs.
+
+> **Service:** Google AI
+> **Model:** Gemini 1.5 Flash
+
+- **Pricing Breakdown (per 1,000 characters):**
+  - **Input (Prompt):** `$0.00001875`
+  - **Output (Response):** `$0.000075`
+- **Primary Applications:**
+  - 📝 Crafting engaging Blog Posts
+  - 💼 Composing professional LinkedIn Posts
+  - 📜 Scripting compelling Video Narratives
+  - 🤖 Powering System Prompts and Agent Logic
+
+---
+
+## 🖼️ **Component 2: Image Creation**
+
+For visually stunning and contextually relevant imagery, we utilize **OpenAI's DALL-E 3**. This model excels at translating text prompts into high-resolution, creative visuals, ensuring our content captures audience attention.
+
+> **Service:** OpenAI
+> **Model:** DALL-E 3 (Standard Quality, 1024x1024)
+
+- **Pricing Breakdown:**
+  - **Cost per Image:** `~$0.04`
+- **Primary Applications:**
+  - 🖼️ Thumbnails for Blog Posts
+  - 🎨 Visuals for LinkedIn Posts
+  - 🎞️ Still images for Video Production
+
+---
+
+## 🎬 **Component 3: Video Creation**
+
+Our dynamic video content is brought to life by **Runway**, a cutting-edge platform for AI-powered video generation. This service enables us to produce short-form videos quickly and affordably.
+
+> **Service:** Runway
+
+- **Pricing Breakdown:**
+  - **Cost per 5-second clip:** `~$0.25`
+  - **Estimated Cost per Video (avg. 4 clips):** `~$1.00`
+- **Primary Applications:**
+  - 🎥 Faceless Social Media Videos
+  - 📢 Promotional Clips and Marketing Content
+
+---
+
+## 🔊 **Component 4: Sound & Voice Generation**
+
+To add a professional audio dimension to our videos, we employ **ElevenLabs**. This service provides high-quality, realistic voiceovers and sound effects, enhancing the overall production value of our content.
+
+> **Service:** ElevenLabs (Starter Plan)
+
+- **Pricing Breakdown:**
+  - **Subscription Cost:** `$5.00 / month`
+  - **Value:** Includes a substantial credit allowance, perfect for our current scale and future experimentation.
+- **Primary Applications:**
+  - 🎤 Voiceovers and Narration for Videos
+  - 🎶 Custom Sound Effects
+
+---
+
+### **Conclusion: A Strategic & Scalable Investment**
+
+This multi-service AI stack provides a powerful, scalable, and financially prudent solution for our marketing objectives.
+
+-   **Cost-Effective Intelligence:** Gemini 1.5 Flash keeps our core text generation costs minimal.
+-   **Premium Visuals, Low Cost:** DALL-E 3 delivers high-impact visuals without significant expense.
+-   **Affordable Video Production:** Runway makes scalable video marketing an accessible reality.
+
+This integrated approach ensures the AI Marketing Team can consistently produce diverse, high-quality content while maintaining a lean and predictable operational budget.

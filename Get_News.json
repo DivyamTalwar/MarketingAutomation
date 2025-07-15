@@ -1,0 +1,52 @@
+{
+  "name": "GetNews",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "topic"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -620,
+        -660
+      ],
+      "id": "b4380baf-5fba-471b-8d17-ef78875e4c7a",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Use this tool to get the latest news on a topic.",
+        "url": "https://newsapi.org/v2/everything?q={{ $('When Executed by Another Workflow').item.json.topic }}&apiKey={{$credentials.newsApi.apiKey}}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "authInHeader"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        -360,
+        -640
+      ],
+      "id": "2932c274-7e64-4664-bd18-004f86f555e2",
+      "name": "News API"
+    }
+  ],
+  "pinData": {},
+  "connections": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "42e777b0-3fd4-4d3d-9455-1ecbc57663a0",
+  "meta": {
+    "instanceId": "087ba087470ae4b97567263c5dadc2f24d1f6a27717504fc17a09d11869434c6"
+  },
+  "id": "gEnBU3F9Qg1euHVz",
+  "tags": []
+}

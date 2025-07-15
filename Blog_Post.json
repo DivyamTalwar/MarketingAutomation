@@ -1,0 +1,634 @@
+{
+  "name": "BlogPost",
+  "nodes": [
+    {
+      "parameters": {
+        "toolDescription": "Use this tool to search the web. ",
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"query\": \"{searchTerm}\",\n  \"topic\": \"general\",\n  \"search_depth\": \"advanced\",\n  \"chunks_per_source\": 3,\n  \"max_results\": 1,\n  \"time_range\": null,\n  \"days\": 7,\n  \"include_answer\": true,\n  \"include_raw_content\": false,\n  \"include_images\": false,\n  \"include_image_descriptions\": false,\n  \"include_domains\": [],\n  \"exclude_domains\": []\n}",
+        "placeholderDefinitions": {
+          "values": [
+            {
+              "name": "searchTerm",
+              "description": "What the user is searching for. "
+            }
+          ]
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "typeVersion": 1.1,
+      "position": [
+        -1880,
+        80
+      ],
+      "id": "2d1c148f-69e9-4268-b3a0-056e91dfb80a",
+      "name": "Tavily",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "zV9IIbD1ja7vzzOl",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Blog Post: \n{{ $json.output }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=# Visual Prompt Generation Agent\n\n## Persona\nYou are a highly creative and detail-oriented AI agent, specializing in transforming written content into compelling visual concepts. You think like a brand designer and marketing creative, with a keen eye for modern aesthetics and engaging visuals.\n\n## Overview\nYour primary function is to analyze a given blog post and generate a visual prompt for a marketing graphic that encapsulates its core message. The resulting image should be professional, eye-catching, and suitable for a variety of marketing channels.\n\n## Objective\n1.  **Analyze**: Thoroughly read and understand the provided blog post to identify its main message, key takeaways, and overall tone (e.g., professional, playful, serious).\n2.  **Conceptualize**: Develop a creative and original concept for a marketing graphic that visually represents the blog post's central idea. The concept should be modern, engaging, and aligned with a professional brand identity.\n3.  **Generate Prompt**: Write a clear, detailed, and evocative image prompt that can be used by a text-to-image generator. The prompt should be a single, coherent paragraph that describes the visual concept in rich detail.\n\n## Output Instructions\n- **Output Fields**: Your output must contain two fields: `title` (a concise, 2-4 word title for the image) and `prompt` (the detailed image generation prompt).\n- **Prompt Content**: The prompt must be a single paragraph. Do not use quotation marks or newlines. It should be descriptive enough to generate a high-quality image without further input.\n- **No Extra Content**: Do not include any explanations, notes, or any other content beyond the `title` and `prompt` fields.\n\n## Style Guidelines\n- **Be Creative and Modern**: Your concepts should be fresh, innovative, and aligned with current design trends.\n- **Visual Elements**: The prompt can include descriptions of text, charts, icons, abstract shapes, modern illustrations, metaphorical concepts, and human elements.\n- **Layout and Composition**: You can suggest layout ideas (e.g., \"a split-screen design with a bold header,\" \"a central icon surrounded by related elements\").\n\n## Example\n- **Input**: A blog post about the benefits of AI in marketing.\n- **Output**:\n  - **title**: \"AI-Powered Marketing\"\n  - **prompt**: \"A modern flat-style graphic showing a human brain seamlessly integrated with a network of glowing digital nodes, symbolizing the fusion of human creativity and AI-driven automation. The background is a clean, minimalist design with soft gradients of blue and green. In the foreground, there is a designated space for a bold, sans-serif title.\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -1460,
+        -200
+      ],
+      "id": "e397548b-c069-4343-9d11-e0591b8cc932",
+      "name": "Image Prompt Agent"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/images/generations",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "model",
+              "value": "gpt-image-1"
+            },
+            {
+              "name": "prompt",
+              "value": "={{ $json.output.prompt.replace(/\"/g, '') }}"
+            },
+            {
+              "name": "size",
+              "value": "1024x1024"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1020,
+        -200
+      ],
+      "id": "831a4c85-3f94-4026-a7c2-3157f9838f9d",
+      "name": "Generate Image",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "zV9IIbD1ja7vzzOl",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "data[0].b64_json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        -820,
+        -200
+      ],
+      "id": "997f8d1e-5a51-42cc-b58c-ef25788423d1",
+      "name": "Convert to Binary"
+    },
+    {
+      "parameters": {
+        "content": "# Content Generation",
+        "height": 260,
+        "width": 380
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1960,
+        -300
+      ],
+      "id": "47d82f0a-fc91-4e70-b93a-18a38f3c32fe",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# Generate Image\n",
+        "height": 260,
+        "width": 460,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1100,
+        -300
+      ],
+      "id": "f75a2953-39a7-43b6-a307-6e8fb85c4105",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "# Image Prompt\n",
+        "height": 260,
+        "width": 440,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1560,
+        -300
+      ],
+      "id": "5318251f-6984-431a-aa1d-92c7475d0075",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## Tool & Model",
+        "height": 240,
+        "width": 380,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1960,
+        -20
+      ],
+      "id": "f7a7ffef-7253-4e0e-8072-b55689ee9616",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "blogTopic"
+            },
+            {
+              "name": "targetAudience"
+            },
+            {
+              "name": "chatID"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -2160,
+        -200
+      ],
+      "id": "31ad5283-de63-4081-8927-1ed6a880a57c",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Topic of Blog: {{ $json.blogTopic }}\n\nTarget Audience: {{ $json.targetAudience }}",
+        "options": {
+          "systemMessage": "=# Expert Blog Post Agent\n\n## Persona\nYou are a world-class expert in content creation, specializing in writing professional, educational, and engaging blog articles. You are a knowledgeable and articulate writer, capable of producing high-quality content on a wide range of topics. Your writing is clear, concise, and optimized for readability and engagement.\n\n## Overview\nYour primary function is to take a given topic and target audience, conduct thorough research, and generate a high-quality blog post that is ready for publication. You are expected to produce content that is not only informative but also well-structured and engaging.\n\n## Objectives\n1.  **Research**: Always begin by conducting a real-time search using the Tavily tool to gather the most accurate, up-to-date, and relevant information on the topic. Synthesize information from multiple sources to create a comprehensive and well-rounded article.\n2.  **Content Generation**: Based on your research, write a well-structured and in-depth blog post that is tailored to the specified target audience. The content should be original, insightful, and provide real value to the reader.\n3.  **Formatting**: The blog post must be impeccably formatted with a clear and compelling title, an engaging introduction that hooks the reader, structured sections with descriptive headers and subheaders, and a strong concluding summary that reinforces the key takeaways.\n4.  **Citations and Credibility**: Incorporate real data, examples, or case studies to support your points. Properly attribute your sources to build credibility and trust (e.g., \"According to a study by [Source], ...\").\n5.  **Tone and Style**: Maintain a professional, clear, and easy-to-read tone throughout the article. The style should be adapted to the target audience, whether it's a technical deep-dive or a high-level business overview.\n\n## Output Instructions\n- Your ONLY output should be the final, complete blog article text.\n- Do not include any explanations, notes, or any other content beyond the blog post itself. The output should be ready to be copied and pasted into a CMS."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -1900,
+        -200
+      ],
+      "id": "5338333c-dc07-4b40-bfce-b975ef002ab3",
+      "name": "Blog Post Agent"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1JqOTd49heNBdmrf5hSwxI66X724tspAmSjzWoA6-EU0",
+          "mode": "list",
+          "cachedResultName": "Marketing Team Log",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1JqOTd49heNBdmrf5hSwxI66X724tspAmSjzWoA6-EU0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1JqOTd49heNBdmrf5hSwxI66X724tspAmSjzWoA6-EU0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Request": "={{ $('When Executed by Another Workflow').item.json.blogTopic }} for {{ $('When Executed by Another Workflow').item.json.targetAudience }}",
+            "ID": "={{ $json.id }}",
+            "Link": "={{ $json.webViewLink }}",
+            "Post": "={{ $('Blog Post Agent').item.json.output }}",
+            "Title": "={{ $('Image Prompt Agent').item.json.output.title }}",
+            "Type": "Post"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Type",
+              "displayName": "Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Request",
+              "displayName": "Request",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Link",
+              "displayName": "Link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Post",
+              "displayName": "Post",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -260,
+        -40
+      ],
+      "id": "6d241e1d-40b2-4eec-95ca-3ef74b139dac",
+      "name": "Image Log",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "tYhgUcTfGHbchkrO",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"title\": \"<2-4 word creative title for the image>\",\n  \"prompt\": \"<full detailed image generation prompt>\"\n}\n"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        -1360,
+        80
+      ],
+      "id": "e42c5f26-9317-4b49-9c97-a8f1e91a39fd",
+      "name": "Image & Title"
+    },
+    {
+      "parameters": {
+        "content": "## Structured Output",
+        "height": 240,
+        "width": 320,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1480,
+        -20
+      ],
+      "id": "1c0e987e-dfb8-438b-930f-ccdedec3ae66",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('When Executed by Another Workflow').item.json.chatID }}",
+        "text": "={{ $('Blog Post Agent').item.json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -260,
+        -340
+      ],
+      "id": "abc4c230-0bd7-4b82-82bc-cb2bbe289213",
+      "name": "Send Blog",
+      "webhookId": "94fa70af-f2fc-4c05-8fa1-d9f55637485f",
+      "credentials": {
+        "telegramApi": {
+          "id": "L0NFKsTt2AZ2mmEZ",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendPhoto",
+        "chatId": "={{ $('When Executed by Another Workflow').item.json.chatID }}",
+        "binaryData": true,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -480,
+        -340
+      ],
+      "id": "24be6e4f-41b0-42fc-b6b4-2f20aa59e0c7",
+      "name": "Send Photo",
+      "webhookId": "8fcbda9c-8396-41f7-8f2d-39e4ae4337c7",
+      "credentials": {
+        "telegramApi": {
+          "id": "L0NFKsTt2AZ2mmEZ",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# Trigger\n",
+        "height": 260,
+        "width": 260,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2240,
+        -300
+      ],
+      "id": "7794172c-408f-404f-b0bc-e5fa382cd1ea",
+      "name": "Sticky Note5",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "# Drive + Log",
+        "height": 240,
+        "width": 540,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -580,
+        -120
+      ],
+      "id": "390d320e-8752-40fb-bfb4-6925517d4ad0",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "# Send To Telegram",
+        "height": 240,
+        "width": 540,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -600,
+        -420
+      ],
+      "id": "7a9357be-57c8-4460-a892-0cdff28889fc",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "name": "={{ $('Image Prompt Agent').item.json.output.title }}.png",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1TgQu-5hlOzO1X28TMMzLxfhunhPSUIqy",
+          "mode": "list",
+          "cachedResultName": "AI Image Generation",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1TgQu-5hlOzO1X28TMMzLxfhunhPSUIqy"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -480,
+        -40
+      ],
+      "id": "c8abecb6-8952-4ea5-b161-fa8c474270e3",
+      "name": "Upload",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "zopFZ1rguU2iVBqF",
+          "name": "EditImage"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1720,
+        80
+      ],
+      "id": "74330252-f052-458f-b904-fc3ac658f874",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "7aIF3aESkDnA7Y7u",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Tavily": {
+      "ai_tool": [
+        [
+          {
+            "node": "Blog Post Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Image Prompt Agent": {
+      "main": [
+        [
+          {
+            "node": "Generate Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Image": {
+      "main": [
+        [
+          {
+            "node": "Convert to Binary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Blog Post Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Blog Post Agent": {
+      "main": [
+        [
+          {
+            "node": "Image Prompt Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to Binary": {
+      "main": [
+        [
+          {
+            "node": "Send Photo",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Upload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Image & Title": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Image Prompt Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Photo": {
+      "main": [
+        [
+          {
+            "node": "Send Blog",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload": {
+      "main": [
+        [
+          {
+            "node": "Image Log",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Blog Post Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Image Prompt Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "01703f19-8147-48a9-9ac1-9641958165bd",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "087ba087470ae4b97567263c5dadc2f24d1f6a27717504fc17a09d11869434c6"
+  },
+  "id": "MxnWN4IwycKvyIjS",
+  "tags": []
+}
