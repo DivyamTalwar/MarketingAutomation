@@ -20,6 +20,12 @@
 
 ---
 
+> ### **📜 The Manifesto: The Agency is Dead. Long Live the Swarm.**
+> The traditional marketing agency is a relic—slow, expensive, and bottlenecked by human limitations. **AI Marketing Swarm** is the response. It is a decentralized, autonomous content engine built on `n8n` that operationalizes a world-class marketing team as a set of interconnected, intelligent workflows. It doesn't just assist; it conceives, creates, and executes entire multi-channel campaigns—from insightful blog posts and professional LinkedIn updates to compelling, AI-generated videos with custom sound. We are not augmenting the marketing team. We are replacing it with a more efficient, scalable, and creative digital organism.
+
+---
+
+### **✨ Core Pillars of the Swarm**
 <table width="100%">
   <tr>
     <td align="center" width="33%">
@@ -39,12 +45,7 @@
 
 ---
 
-> ### **📜 The Manifesto: The Agency is Dead. Long Live the Swarm.**
-> The traditional marketing agency is a relic—slow, expensive, and bottlenecked by human limitations. **AI Marketing Swarm** is the response. It is a decentralized, autonomous content engine built on `n8n` that operationalizes a world-class marketing team as a set of interconnected, intelligent workflows. It doesn't just assist; it conceives, creates, and executes entire multi-channel campaigns—from insightful blog posts and professional LinkedIn updates to compelling, AI-generated videos with custom sound. We are not augmenting the marketing team. We are replacing it with a more efficient, scalable, and creative digital organism.
-
----
-
-### **🎬 The System in Action: The Content Assembly Line**
+### **🎬 The Swarm in Motion: The Content Assembly Line**
 <div align="center">
   <p>Visualizing the workflow—an idea enters the Swarm and emerges as a complete, multi-platform marketing campaign.</p>
   <img src="https://raw.githubusercontent.com/DivyamTalwar/Sarvam.ai-Assignment/main/SourceCode/Workflow.gif" alt="Workflow GIF" width="90%"/>
@@ -53,8 +54,8 @@
 
 ---
 
-### **🧠 The Architecture: A Digital Marketing Agency in a Box**
-AI Marketing Swarm is not a single application. It's a collection of specialized, expert workflows orchestrated by `n8n`. Each workflow is a "specialist" in our digital agency, designed to perform a specific marketing function with peak efficiency. This modular architecture allows for infinite scalability and easy customization.
+### **🧠 The Digital Agency: Architecture & Blueprints**
+AI Marketing Swarm is a collection of specialized, expert workflows orchestrated by `n8n`. Each workflow is a "specialist" in our digital agency, designed to perform a specific marketing function with peak efficiency. This modular architecture allows for infinite scalability and easy customization.
 
 <details>
 <summary><strong>🏛️ Click to Meet the Marketing Task Force: The Specialist Workflows</strong></summary>
@@ -72,9 +73,7 @@ AI Marketing Swarm is not a single application. It's a collection of specialized
 
 </details>
 
----
-
-### **✨ Workflow Spotlight: The Anatomy of a Blog Post**
+#### **Workflow Spotlight: The Anatomy of a Blog Post**
 This is not just JSON; it's a repeatable blueprint for perfect content. Here’s a glimpse into the "mind" of our Blog Post specialist, showcasing the sophisticated prompting that drives its output.
 
 ```json
@@ -107,7 +106,7 @@ This project is forged with a no-compromise, best-in-class technology stack. Eac
 
 ---
 
-### **📈 The Roadmap: Charting the Future of Content**
+### **🗺️ Future Horizons: The Roadmap**
 - ✅ **Phase 1:** Core Multi-Modal Content Workflows (Blog, LinkedIn, Image, Video)
 - ⏳ **Phase 2:** Performance Analysis Loop (Workflows to track content engagement via APIs)
 - 💡 **Phase 3:** Advanced Campaign Strategist (An agent to proactively suggest content based on news and trend analysis)
@@ -116,7 +115,7 @@ This project is forged with a no-compromise, best-in-class technology stack. Eac
 
 ---
 
-### **🛠️ Ignition Sequence: Activate the Swarm**
+### **🛠️ Activation Protocol: Setup & Deployment**
 
 #### 1. **Set Up the Hive (n8n)**
 - **Option A (Cloud):** Sign up for a free `n8n` cloud instance [here](https://n8n.io/pricing/).
@@ -149,7 +148,7 @@ Navigate to a workflow (e.g., `Blog_Post`) and hit "Execute Workflow". Provide a
 
 ---
 
-### **🤝 Call to Arms: Join the Marketing Revolution**
+### **🤝 Join the Swarm: Call for Contributions**
 This is more than a project; it's a new paradigm for content creation. If you are an engineer, a marketer, or a visionary, your contributions are mission-critical.
 *   **⭐ Star the project** to signal your support for the future of automated marketing.
 *   **🍴 Fork the repo** and submit a PR with your own specialist workflows (e.g., for TikTok, Instagram, or Reddit).
@@ -161,9 +160,7 @@ This is more than a project; it's a new paradigm for content creation. If you ar
 <p align="center">
   <a href="https://github.com/DivyamTalwar">
     <img src="https://github-readme-stats.vercel.app/api?username=DivyamTalwar&theme=merko&hide_border=false&include_all_commits=true&count_private=true&bg_color=00000000&border_color=00000000" alt="Divyam's GitHub Stats"/>
-    <img src="https_readme-stats.vercel.app/api/top-langs/?username=DivyamTalwar&theme=merko&hide_border=false&include_all_commits=true&count_private=true&layout=compact&bg_color=00000000&border_color=00000000" alt="Divyam's Top Languages"/>
+    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=DivyamTalwar&theme=merko&hide_border=false&include_all_commits=true&count_private=true&layout=compact&bg_color=00000000&border_color=00000000" alt="Divyam's Top Languages"/>
     <img src="https://nirzak-streak-stats.vercel.app/?user=DivyamTalwar&theme=merko&hide_border=false&background=00000000&border=00000000" alt="Divyam's GitHub Streak"/>
   </a>
 </p>
-#   M a r k e t i n g A u t o m a t i o n  
- 
